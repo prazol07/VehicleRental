@@ -1,0 +1,45 @@
+{% extends 'nav_foot.html' %}
+{% load static %}
+{% block content %}
+<section class="hero-wrap hero-wrap-2 js-fullheight" style="background-image: url({% static '/images/bg_3.jpg' %});" data-stellar-background-ratio="0.5">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
+        <div class="col-md-9 ftco-animate pb-5">
+            <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>About us <i class="ion-ios-arrow-forward"></i></span></p>
+          <h1 class="mb-3 bread">Your Bookings</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+<section class="ftco-section ftco-no-pt">
+    <div class="container">
+        <div class="row justify-content-center">
+      <div class="col-md-12 heading-section text-center ftco-animate mb-5">
+          <span class="subheading">{% if user.is_authenticated %}HI {{user.username}}{% endif %}</user></span>
+        <h2 class="mb-2">Your Bookings</h2>
+      </div>
+    </div>
+    {% for listings in bookinglist %}
+    <div class="row">
+        <div class="col-md-4">
+                <div class="car-wrap rounded ftco-animate">
+                    <div class="img rounded d-flex align-items-end" ><img src="{{listings.rent_info.vehicle_image.url}}" style="width:350px; height:250px;"/>
+                    </div>
+                    <div class="text">
+                        <h2 class="mb-0">{{listings.rent_info.vehicle_name}}</h2>
+                        <div class="d-flex mb-3">
+                            <span class="cat" style="color:black">Vehicle number: {{listings.rent_info.vehiclenumber}}</span>
+                            <p class="price ml-auto">{{listings.rent_info.price_per_day}}....<span>/day</span></p>
+                        </div>
+                        <p class="d-flex mb-0 d-block"><a href="" class="btn btn-primary py-2 mr-5 ml-5">Details</a>
+                        <a href="deletebookings/{{listings.id}}" class="btn btn-primary py-2 mr-5 ml-5">Delete</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+    </div>
+    {% endfor %}
+    </div>
+</section>
+{% endblock %}
